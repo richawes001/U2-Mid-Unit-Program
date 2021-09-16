@@ -18,9 +18,66 @@ Total Earnings: $1184.38
 
  */
 
+    // 1. Get inputs - Hourly Rate, Hours Worked, Sales Commission, and Total Sales
+    // 2. Calculate money made from Hourly Rate * Hours Worked | Calculate money made from Sales Commission percentage from Total Sales
+    // 3. Calculate Total Earnings from previous calculations added
+    // 4. Display results (Total Earnings)
+
+import javax.swing.*;
+import java.text.DecimalFormat;
+
 public class SalesCommission {
 
     public static void main(String[] args) {
+
+        double hourRate = getInput("Please give your hourly rate.");
+        double hourWork = getInput("Please give your hours worked.");
+
+        double salesPercentage = getInput("Please give your sales commission percentage.");
+        double totalSales = getInput("Please give your total sales.");
+
+        double hoursMoney = hoursMoney(hourRate, hourWork);
+        double salesMoney = salesMoney(salesPercentage, totalSales);
+
+        double totalEarnings = hoursMoney + salesMoney;
+
+        outputResults(totalEarnings);
+
+        System.exit(0);
+
+    }
+
+    // Input Method
+
+    public static double getInput(String message){
+
+        return Double.parseDouble(JOptionPane.showInputDialog(message));
+
+    }
+
+    // Money made from Hourly Rate and Hours Worked Method
+
+    public static double hoursMoney(double hourRate, double hourWork){
+
+        return hourRate * hourWork;
+
+    }
+
+    // Money made from Sales Commission percentage from Total Sales
+
+    public static double salesMoney(double salesPercentage, double totalSales){
+
+        return totalSales * (salesPercentage/100.00);
+
+    }
+
+    // Output Method
+
+    public static void outputResults(double totalEarnings){
+
+        DecimalFormat round = new DecimalFormat("#,###.00");
+
+        JOptionPane.showMessageDialog(null, "Your total earnings is: " + round.format(totalEarnings));
 
     }
 
